@@ -27,7 +27,7 @@ Ensure that you have an internet connection and a terminal with `sudo` access. T
    <img width="727" height="377" alt="Screenshot 2026-07-28 185915" src="https://github.com/user-attachments/assets/38e61fb2-93f9-4bf4-81ee-bfa197ac24b3" />
    
 
-## 3. Install AWS CLI v2
+## 2. Install AWS CLI v2
 
 1. Download the AWS CLI v2 package for Linux x86_64:
 
@@ -98,7 +98,7 @@ The expected result.
    <img width="594" height="80" alt="Screenshot 2026-07-28 012323" src="https://github.com/user-attachments/assets/f4d2533f-2934-4612-9b17-296f7626c30c" />
 
 
-## 8. Install and verify helper tools
+## 4. Install and verify helper tools
 
 The lab environment also uses helper tooling such as OpenSSL and Trivy.
 
