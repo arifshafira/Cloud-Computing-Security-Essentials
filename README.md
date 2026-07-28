@@ -1,5 +1,10 @@
 # IKB42603 Lab 0 — Environment Setup
 
+## Course Information
+Course: IKB42603 Cloud Computing Security Essentials
+Lab: Lab 0 - Environment Setup
+Name: Student name Date: 27 July 2026
+
 This report records the environment setup completed for **IKB42603 Cloud Computing Lab 0**, following `IKB42603_Lab0_Environment_Setup_Cheatsheet.pdf`. The commands shown target the Kali Linux environment used in the supplied evidence.
 
 ## Prerequisites
