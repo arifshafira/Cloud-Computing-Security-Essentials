@@ -18,7 +18,7 @@ Ensure that you have an internet connection and a terminal with `sudo` access. T
 
    The expected result includes `Hello from Docker!`.
 
-   ![Docker hello-world verification](Docker%20Installer/Screenshot%202026-07-28%20185915.png)
+   ![Docker hello-world verification](Docker%20Installer/Screenshot 2026-07-28 185915)
 
 ## 3. Install AWS CLI v2
 
