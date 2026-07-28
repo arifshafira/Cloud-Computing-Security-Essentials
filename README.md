@@ -46,6 +46,8 @@ Ensure that you have an internet connection and a terminal with `sudo` access. T
    ```bash
    aws --version
    ```
+The expected result
+<img width="735" height="68" alt="Screenshot 2026-07-28 011009" src="https://github.com/user-attachments/assets/27a2e469-f4eb-49dc-bd7c-1c2761963a3e" />
 
 ## 3. Install kind and kubectl
 
@@ -70,7 +72,9 @@ Ensure that you have an internet connection and a terminal with `sudo` access. T
    kind --version
    ```
 
-   Expected: `kind version 0.23.0`.
+   Expected:
+   <img width="570" height="66" alt="Screenshot 2026-07-28 012300" src="https://github.com/user-attachments/assets/ba9179cd-c173-4b0c-b515-63660f8ef90a" />
+
 
 ### Install kubectl
 
@@ -83,7 +87,7 @@ Ensure that you have an internet connection and a terminal with `sudo` access. T
 
    The captured environment returned Kubernetes client version `v1.33.4`.
 
-   ![kubectl client verification](Install%20kind%20%26%20kubectl/Screenshot%202026-07-28%20012323.png)
+   <img width="594" height="80" alt="Screenshot 2026-07-28 012323" src="https://github.com/user-attachments/assets/f4d2533f-2934-4612-9b17-296f7626c30c" />
 
 
 ## 8. Install and verify helper tools
@@ -96,7 +100,7 @@ The lab environment also uses helper tooling such as OpenSSL and Trivy.
    openssl version
    ```
    Output:
-![OpenSSL Version](Helper%20Tools/Screenshot%202026-07-28%013424.png)
+<img width="600" height="65" alt="Screenshot 2026-07-28 013424" src="https://github.com/user-attachments/assets/e83a05c9-e25e-4bac-9922-1bb4e7ee02e3" />
 
 
 2. Use Trivy to scan a container image:
@@ -107,7 +111,7 @@ The lab environment also uses helper tooling such as OpenSSL and Trivy.
 
    The sample scan completed successfully and reported zero vulnerabilities for the scanned Alpine image.
 
-   ![Trivy scan result](Helper%20Tools/Screenshot%202026-07-28%20020025.png)
+  <img width="1702" height="401" alt="Screenshot 2026-07-28 020025" src="https://github.com/user-attachments/assets/279a7a3d-6ca5-42c3-a9ea-942c94fc6d16" />
 
 
 ## 5. Create and validate a Kubernetes cluster
@@ -124,15 +128,17 @@ The lab environment also uses helper tooling such as OpenSSL and Trivy.
    kubectl get nodes
    ```
 
-   Expected: `ccse-control-plane` has status `Ready`.
+   Expected:
+   <img width="678" height="83" alt="Screenshot 2026-07-28 195857" src="https://github.com/user-attachments/assets/92e583a7-dac5-4cf2-bd6c-ddbd1611b42b" />
 
-3. Inspect cluster connectivity:
+
+4. Inspect cluster connectivity:
 
    ```bash
    kubectl cluster-info --context kind-ccse
    ```
+   <img width="582" height="253" alt="Screenshot 2026-07-28 195806" src="https://github.com/user-attachments/assets/687272f4-7bab-4fe8-b7ac-e5a7c5000b46" />
 
-   ![kind cluster created](Kubernete%20Cluster/Screenshot%202026-07-28%20195806.png)
 
 ## 6. Start LocalStack
 
@@ -157,7 +163,8 @@ The lab environment also uses helper tooling such as OpenSSL and Trivy.
 
    Expected: the `localstack/localstack` container is `Up` and port `4566` is mapped.
 
-   ![LocalStack container verification](Local%20Stack/Screenshot%202026-07-28%20195331.png)
+   <img width="989" height="216" alt="Screenshot 2026-07-28 195331" src="https://github.com/user-attachments/assets/1e1c2289-7e99-432a-929d-426f39a5456b" />
+
 
 ## 7. Configure the AWS CLI for LocalStack (one-time setup)
 
@@ -183,7 +190,8 @@ aws $EP sts get-caller-identity
 
 Expected: a JSON response with account ID `000000000000`, confirming AWS CLI communication with LocalStack.
 
-![AWS CLI to LocalStack verification](One-Time%20AWS%20CLI/Screenshot%202026-07-28%20200126.png)
+<img width="534" height="290" alt="Screenshot 2026-07-28 200126" src="https://github.com/user-attachments/assets/f09ce029-cae6-4e2c-b4cb-d516d83088d7" />
+
 
 
 
