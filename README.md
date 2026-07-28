@@ -18,7 +18,7 @@ Ensure that you have an internet connection and a terminal with `sudo` access. T
 
    The expected result includes `Hello from Docker!`.
 
-   !(<img width="727" height="377" alt="Screenshot 2026-07-28 185915" src="https://github.com/user-attachments/assets/38e61fb2-93f9-4bf4-81ee-bfa197ac24b3" />
+   (<img width="727" height="377" alt="Screenshot 2026-07-28 185915" src="https://github.com/user-attachments/assets/38e61fb2-93f9-4bf4-81ee-bfa197ac24b3" />
 )
 
 ## 3. Install AWS CLI v2
