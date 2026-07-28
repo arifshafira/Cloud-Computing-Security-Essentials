@@ -74,6 +74,7 @@ The expected result.
    ```
 
    Expected results.
+   
    <img width="570" height="66" alt="Screenshot 2026-07-28 012300" src="https://github.com/user-attachments/assets/ba9179cd-c173-4b0c-b515-63660f8ef90a" />
 
 
@@ -101,10 +102,11 @@ The lab environment also uses helper tooling such as OpenSSL and Trivy.
    openssl version
    ```
    Expectation Output.
+   
 <img width="600" height="65" alt="Screenshot 2026-07-28 013424" src="https://github.com/user-attachments/assets/e83a05c9-e25e-4bac-9922-1bb4e7ee02e3" />
 
 
-2. Use Trivy to scan a container image:
+3. Use Trivy to scan a container image:
 
    ```bash
    docker run --rm aquasec/trivy image alpine
@@ -130,6 +132,7 @@ The lab environment also uses helper tooling such as OpenSSL and Trivy.
    ```
 
    Expected Output.
+   
    <img width="678" height="83" alt="Screenshot 2026-07-28 195857" src="https://github.com/user-attachments/assets/92e583a7-dac5-4cf2-bd6c-ddbd1611b42b" />
 
 
@@ -138,6 +141,7 @@ The lab environment also uses helper tooling such as OpenSSL and Trivy.
    ```bash
    kubectl cluster-info --context kind-ccse
    ```
+   
    <img width="582" height="253" alt="Screenshot 2026-07-28 195806" src="https://github.com/user-attachments/assets/687272f4-7bab-4fe8-b7ac-e5a7c5000b46" />
 
 
