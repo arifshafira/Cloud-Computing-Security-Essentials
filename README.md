@@ -46,7 +46,7 @@ Ensure that you have an internet connection and a terminal with `sudo` access. T
    ```bash
    aws --version
    ```
-The expected result:.
+The expected result.
 
 <img width="735" height="68" alt="Screenshot 2026-07-28 011009" src="https://github.com/user-attachments/assets/27a2e469-f4eb-49dc-bd7c-1c2761963a3e" />
 
@@ -73,7 +73,7 @@ The expected result:.
    kind --version
    ```
 
-   Expected:
+   Expected results.
    <img width="570" height="66" alt="Screenshot 2026-07-28 012300" src="https://github.com/user-attachments/assets/ba9179cd-c173-4b0c-b515-63660f8ef90a" />
 
 
@@ -100,7 +100,7 @@ The lab environment also uses helper tooling such as OpenSSL and Trivy.
    ```bash
    openssl version
    ```
-   Output:
+   Expectation Output.
 <img width="600" height="65" alt="Screenshot 2026-07-28 013424" src="https://github.com/user-attachments/assets/e83a05c9-e25e-4bac-9922-1bb4e7ee02e3" />
 
 
@@ -129,7 +129,7 @@ The lab environment also uses helper tooling such as OpenSSL and Trivy.
    kubectl get nodes
    ```
 
-   Expected:
+   Expected Output.
    <img width="678" height="83" alt="Screenshot 2026-07-28 195857" src="https://github.com/user-attachments/assets/92e583a7-dac5-4cf2-bd6c-ddbd1611b42b" />
 
 
