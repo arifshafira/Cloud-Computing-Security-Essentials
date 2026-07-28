@@ -46,7 +46,7 @@ Ensure that you have an internet connection and a terminal with `sudo` access. T
    ```bash
    aws --version
    ```
-The expected result:
+The expected result:.
 
 <img width="735" height="68" alt="Screenshot 2026-07-28 011009" src="https://github.com/user-attachments/assets/27a2e469-f4eb-49dc-bd7c-1c2761963a3e" />
 
