@@ -1,217 +1,198 @@
 # IKB42603 Lab 0 — Environment Setup
 
-## Course Information
-**Course:** IKB42603 Cloud Computing Security Essentials  
-**Lab:** Lab 0 – Environment Setup  
-**Name:** Muhammad Arif Shafira Bin Shahrin Amri
-**Date:** 27 July 2026
+**Name:** Muhammad Arif Shafira Bin Shahrin Amri 
+**Course:** IKB42603 Cloud Computing  
+**Lab:** Lab 0 — Environment Setup  
 
-This report records the environment setup completed for **IKB42603 Cloud Computing Lab 0**, following `IKB42603_Lab0_Environment_Setup_Cheatsheet.pdf`. The commands shown target the Kali Linux environment used in the supplied evidence.
+## Objective
 
-## Prerequisites
+Set up and validate a local cloud-computing development environment with Docker, AWS CLI v2, Kubernetes tools (`kind` and `kubectl`), LocalStack, and supporting security tools.
 
-Ensure that you have an internet connection and a terminal with `sudo` access. The required tools are Docker, AWS CLI v2, `kubectl`, kind, LocalStack, and helper tools used by the lab.
+## Learning Outcomes
 
-## 1. Install and verify Docker
+At the end of this lab, I was able to:
 
-1. Install Docker using the method appropriate to your Linux distribution. On a supported Debian/Ubuntu installation, follow Docker's official installation instructions. Do not use the convenience script on Kali rolling, as it may select an unsupported repository.
-2. Start Docker and ensure the current user is permitted to run Docker commands.
-3. Verify that the Docker daemon is working:
+- install and verify Docker container support;
+- install AWS CLI v2 and configure test credentials for LocalStack;
+- install and use `kind` and `kubectl` to create a local Kubernetes cluster;
+- run LocalStack as a Docker container and connect to it through the AWS CLI; and
+- use OpenSSL and Trivy as supporting tools for cloud and container-security tasks.
 
-   ```bash
-   docker run hello-world
-   ```
+## Environment
 
-   The expected result includes `Hello from Docker!`.
+| Item | Details |
+| --- | --- |
+| Host environment | Kali Linux terminal |
+| Container runtime | Docker |
+| Cloud CLI | AWS CLI v2 |
+| Kubernetes tools | kind v0.23.0 and kubectl v1.33.4 |
+| Local AWS emulator | LocalStack on `http://localhost:4566` |
+| Kubernetes cluster | `ccse` (`kind-ccse` context) |
+| Helper tools | OpenSSL and Trivy |
 
-   <img width="727" height="377" alt="Screenshot 2026-07-28 185915" src="https://github.com/user-attachments/assets/38e61fb2-93f9-4bf4-81ee-bfa197ac24b3" />
-   
+## Step-by-Step Implementation
 
-## 2. Install AWS CLI v2
+### 1. Install and verify Docker
 
-1. Download the AWS CLI v2 package for Linux x86_64:
+Docker was installed in the Kali Linux environment. After the Docker daemon was available, I ran the official `hello-world` image to confirm that the Docker client could contact the daemon, pull an image, create a container, and display its output.
 
-   ```bash
-   curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-   ```
+```bash
+docker run hello-world
+```
 
-2. Extract the archive:
+The command displayed `Hello from Docker!`, confirming that Docker was working correctly.
 
-   ```bash
-   unzip awscliv2.zip
-   ```
+![Docker hello-world verification](Docker%20Installer/Screenshot%202026-07-28%20004308.png)
 
-3. Install the CLI:
+### 2. Install AWS CLI v2
 
-   ```bash
-   sudo ./aws/install
-   ```
+I downloaded the Linux x86_64 AWS CLI v2 installer, extracted it, installed it with administrator privileges, and checked the installed version.
 
-4. Confirm the installation:
+```bash
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+aws --version
+```
+![alt text](<Screenshot 2026-07-28 011009.png>)
 
-   ```bash
-   aws --version
-   ```
-The expected result.
+### 3. Install kind and kubectl
 
-<img width="735" height="68" alt="Screenshot 2026-07-28 011009" src="https://github.com/user-attachments/assets/27a2e469-f4eb-49dc-bd7c-1c2761963a3e" />
+I installed `kind` for running Kubernetes clusters in Docker. I then installed `kubectl` and verified that the Kubernetes client was available. The captured output shows kubectl client version `v1.33.4`.
 
-## 3. Install kind and kubectl
+```bash
+curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.23.0/kind-linux-amd64
+chmod +x ./kind
+sudo mv ./kind /usr/local/bin/kind
+kind --version
 
-### Install kind
+kubectl version --client
+```
 
-1. Download kind version 0.23.0:
+![alt text](<Screenshot 2026-07-28 012300.png>)
 
-   ```bash
-   curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.23.0/kind-linux-amd64
-   ```
+![kubectl client verification](Install%20kind%20%26%20kubectl/Screenshot%202026-07-28%20012323.png)
 
-2. Make it executable and place it on the system path:
+### 4. Install and verify helper tools
 
-   ```bash
-   chmod +x ./kind
-   sudo mv ./kind /usr/local/bin/kind
-   ```
+OpenSSL was checked to ensure cryptographic tooling was present. Trivy was then run in a Docker container to scan the Alpine image. The scan completed and reported zero vulnerabilities for the tested image.
 
-3. Verify it:
+```bash
+openssl version
+docker run --rm aquasec/trivy image alpine
+```
+Expected Output:
 
-   ```bash
-   kind --version
-   ```
+![alt text](<Screenshot 2026-07-28 013424.png>)
 
-   Expected results.
-   
-   <img width="570" height="66" alt="Screenshot 2026-07-28 012300" src="https://github.com/user-attachments/assets/ba9179cd-c173-4b0c-b515-63660f8ef90a" />
+Expected Output:
 
+![Trivy scan of Alpine image](Helper%20Tools/Screenshot%202026-07-28%20020025.png)
 
-### Install kubectl
+### 5. Create and validate the Kubernetes cluster
 
-1. Install `kubectl` using the Kubernetes Linux installation method appropriate to your architecture.
-2. Confirm the client is available:
+I created a local kind cluster named `ccse`. The command created the control-plane node and set the active Kubernetes context to `kind-ccse`. I then checked the node status and cluster connectivity.
 
-   ```bash
-   kubectl version --client
-   ```
+```bash
+kind create cluster --name ccse
+kubectl get nodes
+kubectl cluster-info --context kind-ccse
+```
 
-   The captured environment returned Kubernetes client version `v1.33.4`.
+![kind cluster creation](Kubernete%20Cluster/Screenshot%202026-07-28%20195806.png)
 
-   <img width="594" height="80" alt="Screenshot 2026-07-28 012323" src="https://github.com/user-attachments/assets/f4d2533f-2934-4612-9b17-296f7626c30c" />
+### 6. Start LocalStack
 
+LocalStack was started as a detached Docker container, with its edge service published on port `4566`. I verified that the container was running using `docker ps`.
 
-## 4. Install and verify helper tools
+```bash
+docker run -d --name localstack -p 4566:4566 localstack/localstack
+docker ps
+```
 
-The lab environment also uses helper tooling such as OpenSSL and Trivy.
+![LocalStack image download and container start](Local%20Stack/Screenshot%202026-07-28%20021020.png)
 
-1. Confirm OpenSSL is installed:
+![LocalStack container verification](Local%20Stack/Screenshot%202026-07-28%20195331.png)
 
-   ```bash
-   openssl version
-   ```
-   Expectation Output.
-   
-<img width="600" height="65" alt="Screenshot 2026-07-28 013424" src="https://github.com/user-attachments/assets/e83a05c9-e25e-4bac-9922-1bb4e7ee02e3" />
+### 7. Configure AWS CLI for LocalStack
 
-
-3. Use Trivy to scan a container image:
-
-   ```bash
-   docker run --rm aquasec/trivy image alpine
-   ```
-
-   The sample scan completed successfully and reported zero vulnerabilities for the scanned Alpine image.
-
-  <img width="1702" height="401" alt="Screenshot 2026-07-28 020025" src="https://github.com/user-attachments/assets/279a7a3d-6ca5-42c3-a9ea-942c94fc6d16" />
-
-
-## 5. Create and validate a Kubernetes cluster
-
-1. Create a kind cluster called `ccse`:
-
-   ```bash
-   kind create cluster --name ccse
-   ```
-
-2. Confirm the node becomes ready:
-
-   ```bash
-   kubectl get nodes
-   ```
-
-   Expected Output.
-   
-   <img width="678" height="83" alt="Screenshot 2026-07-28 195857" src="https://github.com/user-attachments/assets/92e583a7-dac5-4cf2-bd6c-ddbd1611b42b" />
-
-
-4. Inspect cluster connectivity:
-
-   ```bash
-   kubectl cluster-info --context kind-ccse
-   ```
-   
-   <img width="582" height="253" alt="Screenshot 2026-07-28 195806" src="https://github.com/user-attachments/assets/687272f4-7bab-4fe8-b7ac-e5a7c5000b46" />
-
-
-## 6. Start LocalStack
-
-1. Check whether a LocalStack container already exists:
-
-   ```bash
-   docker ps
-   ```
-
-2. If needed, remove an earlier container and start a fresh instance on port 4566:
-
-   ```bash
-   docker rm -f localstack 2>/dev/null || true
-   docker run -d --name localstack -p 4566:4566 localstack/localstack
-   ```
-
-3. Verify that it is running:
-
-   ```bash
-   docker ps
-   ```
-
-   Expected: the `localstack/localstack` container is `Up` and port `4566` is mapped.
-
-   <img width="989" height="216" alt="Screenshot 2026-07-28 195331" src="https://github.com/user-attachments/assets/1e1c2289-7e99-432a-929d-426f39a5456b" />
-
-
-## 7. Configure the AWS CLI for LocalStack (one-time setup)
-
-Use placeholder credentials because LocalStack does not require real AWS credentials:
+Because LocalStack accepts placeholder credentials, I configured the AWS CLI with test values and set a terminal variable for the LocalStack endpoint. An STS `get-caller-identity` request returned account ID `000000000000`, which confirmed successful AWS CLI communication with LocalStack.
 
 ```bash
 aws configure set aws_access_key_id test
 aws configure set aws_secret_access_key test
 aws configure set region us-east-1
-```
 
-Set the LocalStack endpoint for the current terminal:
-
-```bash
 EP='--endpoint-url=http://localhost:4566'
-```
-
-Test the LocalStack AWS endpoint:
-
-```bash
 aws $EP sts get-caller-identity
 ```
 
-Expected: a JSON response with account ID `000000000000`, confirming AWS CLI communication with LocalStack.
+![AWS CLI successfully connected to LocalStack](One-Time%20AWS%20CLI/Screenshot%202026-07-28%20200126.png)
 
-<img width="534" height="290" alt="Screenshot 2026-07-28 200126" src="https://github.com/user-attachments/assets/f09ce029-cae6-4e2c-b4cb-d516d83088d7" />
+## Commands Used
 
+```bash
+# Docker
+docker run hello-world
+docker run -d --name localstack -p 4566:4566 localstack/localstack
+docker ps
 
+# AWS CLI v2
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+aws --version
+aws configure set aws_access_key_id test
+aws configure set aws_secret_access_key test
+aws configure set region us-east-1
+EP='--endpoint-url=http://localhost:4566'
+aws $EP sts get-caller-identity
 
+# Kubernetes
+curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.23.0/kind-linux-amd64
+chmod +x ./kind
+sudo mv ./kind /usr/local/bin/kind
+kind --version
+kubectl version --client
+kind create cluster --name ccse
+kubectl get nodes
+kubectl cluster-info --context kind-ccse
 
-## Final checklist
+# Helper tools
+openssl version
+docker run --rm aquasec/trivy image alpine
+```
 
-- [x] Docker runs `hello-world` successfully.
-- [x] AWS CLI v2 is installed and configured with LocalStack test credentials.
-- [x] `kind` and `kubectl` are installed.
-- [x] The `ccse` Kubernetes control-plane node is `Ready`.
-- [x] LocalStack is running on `http://localhost:4566`.
-- [x] AWS STS calls succeed through the LocalStack endpoint.
-- [x] Helper-tool verification was completed.
+## Screenshots
+
+The screenshots embedded in the implementation steps provide evidence of the completed work:
+
+- Docker `hello-world` verification.
+- AWS CLI v2 download.
+- kind download and kubectl client version verification.
+- Trivy Alpine image scan.
+- kind cluster creation.
+- LocalStack startup and running-container verification.
+- AWS CLI STS request to LocalStack.
+
+## Challenges Encountered
+
+The Docker convenience-install script attempted to use a Docker Debian repository for `kali-rolling`, which did not provide a valid Release file. The terminal also showed hostname-resolution errors for the local hostname during that attempt. I treated this as an installation-method issue, used a supported installation approach for the environment, and verified the successful final Docker installation with `docker run hello-world`.
+
+## Lessons Learned
+
+- A successful container run is a stronger Docker check than only confirming that the command is installed.
+- Package repositories must match the Linux distribution and release; an installation script intended for Debian may not work unchanged on Kali rolling.
+- LocalStack allows AWS CLI practice without real cloud credentials or charges by using test credentials and a local endpoint.
+- kind provides a practical Kubernetes cluster for local development because it runs the cluster nodes as Docker containers.
+- Container-image scanning should be part of a basic cloud-development workflow.
+
+## References
+
+1. `IKB42603_Lab0_Environment_Setup_Cheatsheet.pdf` (lab guide provided for this exercise).
+2. [Docker documentation](https://docs.docker.com/).
+3. [AWS CLI version 2 installation guide](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
+4. [kind documentation](https://kind.sigs.k8s.io/).
+5. [Kubernetes kubectl documentation](https://kubernetes.io/docs/reference/kubectl/).
+6. [LocalStack documentation](https://docs.localstack.cloud/).
+7. [Trivy documentation](https://trivy.dev/latest/).
