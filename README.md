@@ -1,8 +1,9 @@
 # IKB42603 Lab 0 — Environment Setup
 
-**Name:** Muhammad Arif Shafira
-**Course:** IKB42603 Cloud Computing  
-**Lab:** Lab 0 — Environment Setup  
+**Course:** IKB42603 Cloud Computing Security Essentials  
+**Lab:** Lab 0 – Environment Setup  
+**Name:** Muhammad Arif Shafira Bin Shahrin Amri  
+**Date:** 29 July 2026
 
 
 ## Objective
