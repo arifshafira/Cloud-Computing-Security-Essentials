@@ -43,7 +43,8 @@ docker run hello-world
 
 The command displayed `Hello from Docker!`, confirming that Docker was working correctly.
 
-![Docker hello-world verification](Docker%20Installer/Screenshot%202026-07-28%20004308.png)
+<img width="727" height="377" alt="Screenshot 2026-07-28 185915" src="https://github.com/user-attachments/assets/bc2d78e0-954a-4d52-b1cf-143b4e090da1" />
+
 
 ### 2. Install AWS CLI v2
 
@@ -55,7 +56,8 @@ unzip awscliv2.zip
 sudo ./aws/install
 aws --version
 ```
-![alt text](<Screenshot 2026-07-28 011009.png>)
+<img width="735" height="68" alt="Screenshot 2026-07-28 011009" src="https://github.com/user-attachments/assets/937a5361-6a57-4d05-ae6e-1003da3dbf4a" />
+
 
 ### 3. Install kind and kubectl
 
@@ -70,9 +72,11 @@ kind --version
 kubectl version --client
 ```
 
-![alt text](<Screenshot 2026-07-28 012300.png>)
+<img width="570" height="66" alt="Screenshot 2026-07-28 012300" src="https://github.com/user-attachments/assets/58557e58-67a1-49d5-ad89-8ea9cd5eaff7" />
 
-![kubectl client verification](Install%20kind%20%26%20kubectl/Screenshot%202026-07-28%20012323.png)
+
+<img width="594" height="80" alt="Screenshot 2026-07-28 012323" src="https://github.com/user-attachments/assets/4eacc076-736d-4cb0-8d41-fe9000695418" />
+
 
 ### 4. Install and verify helper tools
 
@@ -84,11 +88,11 @@ docker run --rm aquasec/trivy image alpine
 ```
 Expected Output:
 
-![alt text](<Screenshot 2026-07-28 013424.png>)
+<img width="600" height="65" alt="Screenshot 2026-07-28 013424" src="https://github.com/user-attachments/assets/6ea7565a-9ea1-47ab-bc7e-3589ba63cf77" />
 
 Expected Output:
 
-![Trivy scan of Alpine image](Helper%20Tools/Screenshot%202026-07-28%20020025.png)
+<img width="1702" height="401" alt="Screenshot 2026-07-28 020025" src="https://github.com/user-attachments/assets/bfe53fd8-b619-4bf4-a646-0567ddf18780" />
 
 ### 5. Create and validate the Kubernetes cluster
 
@@ -100,7 +104,7 @@ kubectl get nodes
 kubectl cluster-info --context kind-ccse
 ```
 
-![kind cluster creation](Kubernete%20Cluster/Screenshot%202026-07-28%20195806.png)
+<img width="582" height="253" alt="Screenshot 2026-07-28 195806" src="https://github.com/user-attachments/assets/2209b8dc-5fba-4882-8411-3576f95532ec" />
 
 ### 6. Start LocalStack
 
@@ -111,9 +115,11 @@ docker run -d --name localstack -p 4566:4566 localstack/localstack
 docker ps
 ```
 
-![LocalStack image download and container start](Local%20Stack/Screenshot%202026-07-28%20021020.png)
+<img width="857" height="452" alt="Screenshot 2026-07-28 021020" src="https://github.com/user-attachments/assets/ecf1f91a-8c11-4160-b608-116e7e220c38" />
 
-![LocalStack container verification](Local%20Stack/Screenshot%202026-07-28%20195331.png)
+
+<img width="989" height="216" alt="Screenshot 2026-07-28 195331" src="https://github.com/user-attachments/assets/78d95fab-6070-41de-af22-92357a770c26" />
+
 
 ### 7. Configure AWS CLI for LocalStack
 
@@ -128,7 +134,8 @@ EP='--endpoint-url=http://localhost:4566'
 aws $EP sts get-caller-identity
 ```
 
-![AWS CLI successfully connected to LocalStack](One-Time%20AWS%20CLI/Screenshot%202026-07-28%20200126.png)
+<img width="534" height="290" alt="Screenshot 2026-07-28 200126" src="https://github.com/user-attachments/assets/319f8278-75bf-48f8-a134-38c735ab1fe0" />
+
 
 ## Commands Used
 
