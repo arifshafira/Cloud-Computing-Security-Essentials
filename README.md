@@ -4,6 +4,7 @@
 **Course:** IKB42603 Cloud Computing  
 **Lab:** Lab 0 — Environment Setup  
 
+
 ## Objective
 
 Set up and validate a local cloud-computing development environment with Docker, AWS CLI v2, Kubernetes tools (`kind` and `kubectl`), LocalStack, and supporting security tools.
