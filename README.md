@@ -125,10 +125,6 @@ docker ps
 Because LocalStack accepts placeholder credentials, I configured the AWS CLI with test values and set a terminal variable for the LocalStack endpoint. An STS `get-caller-identity` request returned account ID `000000000000`, which confirmed successful AWS CLI communication with LocalStack.
 
 ```bash
-aws configure set aws_access_key_id test
-aws configure set aws_secret_access_key test
-aws configure set region us-east-1
-
 EP='--endpoint-url=http://localhost:4566'
 aws $EP sts get-caller-identity
 ```
