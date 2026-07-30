@@ -114,11 +114,16 @@ LocalStack was started as a detached Docker container, with its edge service pub
 ```bash
 docker run -d --name localstack -p 4566:4566 localstack/localstack
 docker ps
+curl http://localhost:4566/_localstack/health
 ```
 
 <img width="857" height="452" alt="Screenshot 2026-07-28 021020" src="https://github.com/user-attachments/assets/ecf1f91a-8c11-4160-b608-116e7e220c38" />
 
+<img width="966" height="594" alt="image" src="https://github.com/user-attachments/assets/a96a5c2b-dbba-45d0-8f8d-93244bdf9615" />
 
+GUI Docker View:
+
+<img width="1919" height="998" alt="Screenshot 2026-07-30 192842" src="https://github.com/user-attachments/assets/b76dd1d5-b154-427e-b2f5-2aa7b7a3356c" />
 
 ### 7. Configure AWS CLI for LocalStack
 
@@ -129,7 +134,7 @@ EP='--endpoint-url=http://localhost:4566'
 aws $EP sts get-caller-identity
 ```
 
-<img width="534" height="290" alt="Screenshot 2026-07-28 200126" src="https://github.com/user-attachments/assets/319f8278-75bf-48f8-a134-38c735ab1fe0" />
+<img width="534" height="172" alt="image" src="https://github.com/user-attachments/assets/95bd174b-b284-4ba0-b496-20117372a707" />
 
 
 ## Commands Used
