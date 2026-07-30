@@ -43,17 +43,18 @@ Configure and verify secure access controls in two local cloud environments:
 
    The command returned LocalStack account `000000000000` and the root ARN, confirming that the local AWS-compatible environment was ready.
 
-**Evidence:** [LocalStack health check](<Session A/Local Stack health.png>) and [AWS CLI identity check](<Session A/AWS CLI.png>).
+**Evidence:** <img width="966" height="655" alt="Local Stack health" src="https://github.com/user-attachments/assets/c5320899-641e-45bd-af81-21901acff876" />
+ <img width="613" height="127" alt="AWS CLI" src="https://github.com/user-attachments/assets/38fea938-3f7a-4979-a23d-66ea8fc1e701" />
 
-### Task 1 — Verify the local AWS environment
+### Task 1: Cloud Identity Landscape
 
-| Check | Result |
-|---|---|
-| LocalStack container | Started successfully. |
-| IAM service health | Available. |
-| AWS CLI endpoint | Connected successfully to `http://localhost:4566`. |
-
-**Outcome:** The environment was ready for IAM configuration.
+| Concept | AWS Term | Purpose |
+| :--- | :--- | :--- |
+| **All-powerful owner** | Root user | The main owner account with full, unrestricted access to everything. Use it only for setup. |
+| **Human/app identity** | IAM User | A permanent login for a specific person or app needing ongoing access. |
+| **Permission bundle** | IAM Policy | A list of rules defining what an identity is allowed or denied to do. |
+| **Collection of users** | IAM Group | A team or list of users used to give the same permissions to everyone at once. |
+| **Temporary identity** | IAM Role | A temporary pass that grants short-term access without needing permanent keys. |
 
 ### Task 2 — Create an administrative group and user
 
@@ -89,7 +90,10 @@ Configure and verify secure access controls in two local cloud environments:
 
 **Outcome:** `CloudAdmin_Arif` inherits administrative permissions from the `Admins` group. This centralizes administrator access management at the group level.
 
-**Evidence:** [Group creation and policy attachment](<Session A/Task 2/1.png>), [user creation](<Session A/Task 2/2.png>), and [membership verification](<Session A/Task 2/3.png>).
+**Evidence:** <img width="1020" height="209" alt="image" src="https://github.com/user-attachments/assets/2cfd0317-e502-4c36-89e9-0668d8596daa" />
+<img width="651" height="189" alt="image" src="https://github.com/user-attachments/assets/dba216ec-7b77-4fc3-86cd-ff9d912cb81f" />
+<img width="719" height="388" alt="image" src="https://github.com/user-attachments/assets/dffd7a81-f747-4c20-900e-8e3cb2d46c47" />
+
 
 ### Task 3 — Create a least-privilege analyst user
 
@@ -111,7 +115,11 @@ Configure and verify secure access controls in two local cloud environments:
 
 **Outcome:** `Analyst_Arif` has `AmazonS3ReadOnlyAccess` rather than full administrative access. This implements least privilege because the user can read S3 resources without receiving write or account-management permissions.
 
-**Evidence:** [Analyst user creation](<Session A/Task 3/1.png>) and [policy attachment and verification](<Session A/Task 3/2.png>).
+**Evidence:** 
+
+<img width="602" height="181" alt="image" src="https://github.com/user-attachments/assets/f64ef015-3f24-4df6-874d-9e78f8d29902" />
+<img width="1032" height="220" alt="2" src="https://github.com/user-attachments/assets/ac31ace6-6caa-4a1e-95dd-b15106cc6f14" />
+
 
 ### Task 4 — Create, inspect, and deactivate an access key
 
@@ -138,7 +146,12 @@ Configure and verify secure access controls in two local cloud environments:
 
 **Outcome:** The analyst key was initially active, then changed to `Inactive`. The secret access key and access-key ID are not reproduced in this report because credentials are sensitive. Deactivation prevents future use while retaining the key record for review or rotation.
 
-**Evidence:** [Access-key creation](<Session A/Task 4/1.png>), [key listing](<Session A/Task 4/2.png>), and [key deactivation](<Session A/Task 4/3.png>).
+**Evidence:** 
+
+<img width="600" height="187" alt="image" src="https://github.com/user-attachments/assets/5dd2f1ee-b8fe-4d95-affb-3f75ddc365cf" />
+<img width="569" height="203" alt="image" src="https://github.com/user-attachments/assets/6ea9c1c0-cf1b-471d-85cd-6b513d5dff40" />
+ <img width="922" height="49" alt="3" src="https://github.com/user-attachments/assets/9558f589-17c0-4ec2-8fcf-4b826dfd61dd" />
+
 
 ## Session B — Kubernetes Access Control (RBAC)
 
@@ -164,7 +177,12 @@ Configure and verify secure access controls in two local cloud environments:
 
 **Outcome:** The `ccse-lab1-control-plane` node was `Ready`, so the cluster was available for RBAC configuration.
 
-**Evidence:** [Cluster creation](<Session B/Setup/Create a Local Kubernetes Cluster 1.png>), [cluster information](<Session B/Setup/Create a Local Kubernetes Cluster 2.png>), and [node status](<Session B/Setup/Cluster 3.png>).
+**Evidence:** 
+
+<img width="772" height="257" alt="Create a Local Kubernetes Cluster 1" src="https://github.com/user-attachments/assets/fd39f180-260a-482d-8b36-4560f1de0227" />
+ <img width="874" height="120" alt="Create a Local Kubernetes Cluster 2" src="https://github.com/user-attachments/assets/663b248f-01d1-4461-9625-1ef1f350ddf9" />
+ <img width="552" height="83" alt="Cluster 3" src="https://github.com/user-attachments/assets/8a7f1f73-7320-4626-9879-4e2ea217e68a" />
+
 
 ### Task 5 — Create development and production namespaces
 
@@ -188,7 +206,10 @@ Configure and verify secure access controls in two local cloud environments:
 
 **Outcome:** Both `dev` and `prod` were active. Namespace separation provides a boundary for applying different access controls to development and production workloads.
 
-**Evidence:** [Namespace creation and verification](<Session B/Task 5/Screenshot 2026-07-30 235420.png>).
+**Evidence:** 
+
+<img width="420" height="302" alt="Screenshot 2026-07-30 235420" src="https://github.com/user-attachments/assets/f8417152-a2ea-4ecd-87fd-960152e9176c" />
+
 
 ### Task 6 — Configure namespace-scoped RBAC for a developer
 
@@ -216,7 +237,10 @@ Configure and verify secure access controls in two local cloud environments:
 
 **Outcome:** `dev-user` receives only read access to pods in `dev`. The permissions are namespace-scoped and do not automatically extend to `prod`.
 
-**Evidence:** [Service account, role, and role binding](<Session B/Task 6/T6.png>).
+**Evidence:**
+
+<img width="559" height="227" alt="T6" src="https://github.com/user-attachments/assets/9564c699-ad44-4ca9-9f19-d079d4f759f2" />
+
 
 ### Task 7 — Verify effective Kubernetes permissions
 
@@ -255,7 +279,10 @@ Configure and verify secure access controls in two local cloud environments:
 
 **Outcome:** The permission checks prove that RBAC is working as intended: the service account can list pods only in `dev`, cannot delete them, and has no access to pods in `prod`.
 
-**Evidence:** [Allowed pod listing](<Session B/Task 7/T7 1.png>), [denied pod deletion](<Session B/Task 7/T7 2.png>), [denied production access](<Session B/Task 7/T7 3.png>), and [role-binding YAML](<Session B/Verification Command.png>).
+**Evidence:**
+
+<img width="506" height="305" alt="Verification Command" src="https://github.com/user-attachments/assets/e40fc43c-2f06-49b2-8310-361c8f51361f" />
+
 
 ### Clean up
 
@@ -268,7 +295,10 @@ docker stop localstack && docker rm localstack
 
 **Outcome:** The Kind cluster and LocalStack container were removed.
 
-**Evidence:** [Cleanup commands](<Session B/Clean up/Cleanup.png>).
+**Evidence:** 
+
+<img width="431" height="157" alt="Cleanup" src="https://github.com/user-attachments/assets/a2f2d907-83fa-4d3b-97f4-bab4c59f3dea" />
+
 
 ## Security Summary
 
