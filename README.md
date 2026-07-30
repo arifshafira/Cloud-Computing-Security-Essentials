@@ -119,8 +119,6 @@ docker ps
 <img width="857" height="452" alt="Screenshot 2026-07-28 021020" src="https://github.com/user-attachments/assets/ecf1f91a-8c11-4160-b608-116e7e220c38" />
 
 
-<img width="989" height="216" alt="Screenshot 2026-07-28 195331" src="https://github.com/user-attachments/assets/78d95fab-6070-41de-af22-92357a770c26" />
-
 
 ### 7. Configure AWS CLI for LocalStack
 
