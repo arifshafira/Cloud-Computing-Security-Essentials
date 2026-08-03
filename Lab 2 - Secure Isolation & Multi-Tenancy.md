@@ -32,7 +32,11 @@ Observed results:
 - `tenant-a`: `web-79d9f568b9-mhg1z` was Running and the `web` service had ClusterIP `10.96.8.177` on port `80/TCP`.
 - `tenant-b`: `web-79d9f568b9-5mbnc` was Running and the `web` service had ClusterIP `10.96.204.36` on port `80/TCP`.
 
-Evidence: [Tenant A workload](/C:/Users/HP/Desktop/UniKL/Semester%205/Cloud%20Computing/Lab%202/Task%201/Task%201%20-%20a.png) and [Tenant B workload](/C:/Users/HP/Desktop/UniKL/Semester%205/Cloud%20Computing/Lab%202/Task%201/Task%201%20-b.png).
+Evidence: 
+
+<img width="575" height="127" alt="Task 1 - a" src="https://github.com/user-attachments/assets/0669c39b-afb6-4227-a34d-400a0da6ed7a" />
+<img width="557" height="124" alt="Task 1 -b" src="https://github.com/user-attachments/assets/9523fb96-a2ca-4f3e-84e5-5d2f24172caf" />
+
 
 ## Task 2 — Demonstrate the default network behaviour
 
@@ -45,7 +49,10 @@ kubectl -n tenant-a run probe --rm -it --image=curlimages/curl --restart=Never -
 
 The request returned `HTTP 200`. This shows that namespaces alone do **not** restrict pod-to-pod traffic; Kubernetes networking is permissive by default unless a supported network-policy implementation enforces rules.
 
-Evidence: [Initial cross-tenant connectivity test](/C:/Users/HP/Desktop/UniKL/Semester%205/Cloud%20Computing/Lab%202/Task%202/Task%202.png).
+Evidence: 
+
+<img width="709" height="97" alt="Task 2" src="https://github.com/user-attachments/assets/661f4101-3e25-40f3-bd1a-3c34ffd5a6a4" />
+
 
 ## Task 3 — Limit tenant resource consumption
 
@@ -65,7 +72,10 @@ The quota permits at most five pods, one CPU request, and `512Mi` of memory requ
 
 Resource quotas prevent one tenant from exhausting shared cluster capacity and affecting other tenants.
 
-Evidence: [ResourceQuota verification](/C:/Users/HP/Desktop/UniKL/Semester%205/Cloud%20Computing/Lab%202/Task%203/Task%203.png).
+Evidence: 
+
+<img width="507" height="160" alt="Task 3" src="https://github.com/user-attachments/assets/3f9067c0-346e-4e46-8353-5041e87d2c87" />
+
 
 ## Task 4 — Enforce default-deny ingress for tenant B
 
@@ -91,7 +101,11 @@ kubectl apply -f -
 
 The empty `podSelector` selects every pod in `tenant-b`. Because no ingress rules are present, inbound traffic to those selected pods is denied. Re-running the curl test from `tenant-a` returned `HTTP 000` and the probe terminated with an error, confirming that the previous access path was blocked.
 
-Evidence: [Policy creation](/C:/Users/HP/Desktop/UniKL/Semester%205/Cloud%20Computing/Lab%202/Task%204/Task%204%20-%201.png) and [Blocked connectivity verification](/C:/Users/HP/Desktop/UniKL/Semester%205/Cloud%20Computing/Lab%202/Task%204/Task%204%20-%20Verify.png).
+Evidence: 
+
+<img width="550" height="203" alt="Task 4 - 1" src="https://github.com/user-attachments/assets/ca098c26-3bac-4e49-a2b4-a14741c0ba1a" />
+<img width="622" height="127" alt="Task 4 - Verify" src="https://github.com/user-attachments/assets/ed118240-86a3-44b9-bf08-6bf7e118dba0" />
+
 
 ## Task 5 — Verify least-privilege RBAC
 
@@ -104,7 +118,11 @@ kubectl auth can-i get secrets -n tenant-b --as=$SA
 
 The service account was allowed to get secrets in `tenant-a` (`yes`) and denied the same action in `tenant-b` (`no`). This verifies namespace-scoped RBAC: the identity has only the permissions assigned for its own tenant.
 
-Evidence: [Allowed in tenant A](/C:/Users/HP/Desktop/UniKL/Semester%205/Cloud%20Computing/Lab%202/Task%205/Task%205%20-1.png) and [Denied in tenant B](/C:/Users/HP/Desktop/UniKL/Semester%205/Cloud%20Computing/Lab%202/Task%205/Task%205%20-%202.png).
+Evidence: 
+
+<img width="460" height="67" alt="Task 5 -1" src="https://github.com/user-attachments/assets/ab1a5b95-159a-448d-ae7b-2b6adc64f119" />
+<img width="461" height="65" alt="Task 5 - 2" src="https://github.com/user-attachments/assets/7fd99653-0b50-493c-a5aa-42007c19fc74" />
+
 
 ## Task 6 — Remove sensitive data securely
 
@@ -127,7 +145,11 @@ docker run --rm -v csse-vol:/data alpine sh -c \
 
 The `dd` output confirms that 1,024 bytes were written and the command reported `wiped`. This is a demonstration of overwrite-before-delete; it should not be treated as a universal guarantee on copy-on-write filesystems, SSDs, managed storage, or snapshot-enabled volumes.
 
-Evidence: [Initial removal and scan](/C:/Users/HP/Desktop/UniKL/Semester%205/Cloud%20Computing/Lab%202/Task%206/Task%206%20-%201.png) and [Overwrite-before-delete](/C:/Users/HP/Desktop/UniKL/Semester%205/Cloud%20Computing/Lab%202/Task%206/Task%206%20-%202.png).
+Evidence:
+
+<img width="669" height="178" alt="Task 6 - 1" src="https://github.com/user-attachments/assets/b28da7b4-309f-4e47-972e-41b727f23a43" />
+<img width="678" height="166" alt="Task 6 - 2" src="https://github.com/user-attachments/assets/de9ae428-93fc-4180-9ed7-ec7c8895a52d" />
+ 
 
 ## Final verification
 
@@ -138,7 +160,10 @@ kubectl get networkpolicy -A
 kubectl describe resourcequota tenant-a-quota -n tenant-a
 ```
 
-Evidence: [Final verification](/C:/Users/HP/Desktop/UniKL/Semester%205/Cloud%20Computing/Lab%202/Verification%20Command.png).
+Evidence: 
+
+<img width="509" height="242" alt="Verification Command" src="https://github.com/user-attachments/assets/841c37cd-59a6-4818-b703-36f1c6e74c45" />
+
 
 ## Cleanup and wrap-up
 
@@ -151,7 +176,9 @@ docker volume rm csse-vol
 
 The output confirms deletion of the kind cluster and Docker volume.
 
-Evidence: [Cleanup confirmation](/C:/Users/HP/Desktop/UniKL/Semester%205/Cloud%20Computing/Lab%202/Cleanup%20%26%20Wrap%20Up.png).
+Evidence: 
+
+<img width="361" height="143" alt="Cleanup   Wrap Up" src="https://github.com/user-attachments/assets/ea0fb461-5d0a-456a-a323-9b3d084bf4f5" />
 
 ## Short-answer question
 
