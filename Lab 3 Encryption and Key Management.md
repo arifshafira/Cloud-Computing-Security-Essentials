@@ -29,7 +29,8 @@ This lab demonstrates protection of cloud data at rest and in transit, key manag
 3. Decrypted `record.enc` into `record.dec.txt` using the same passphrase.
 4. Compared the original and decrypted files. The command returned `MATCH: decryption successful`, confirming correct recovery of the original plaintext.
 
-   ![alt text](<Task 1 - 1.png>)
+   <img width="634" height="128" alt="Task 1 - 1" src="https://github.com/user-attachments/assets/33cdf7e0-00a6-4968-afa4-e5e1be5c185f" />
+
 
 **Result:** AES-256 protected the file at rest; it could only be recovered with the shared secret/passphrase.
 
@@ -40,7 +41,8 @@ This lab demonstrates protection of cloud data at rest and in transit, key manag
 3. Signed `record.txt` with the private key using SHA-256.
 4. Verified `record.sig` with the public key. The output was `Verified OK`.
 
-   ![alt text](<Task 2.png>)
+   <img width="627" height="82" alt="Task 2" src="https://github.com/user-attachments/assets/110bcc02-5e5e-4f73-a637-7d036b86456b" />
+
 
 **Result:** The successful signature verification proves that the signed file has not changed since signing and that the corresponding private-key holder created the signature.
 
@@ -50,7 +52,8 @@ This lab demonstrates protection of cloud data at rest and in transit, key manag
 2. Started an Nginx container that exposes HTTPS on port 8443 and serves `record.txt`.
 3. Retrieved the file with `curl -k https://localhost:8443/record.txt`; `-k` was used only because the certificate is self-signed.
 
-![Task 3 — HTTPS service and TLS retrieval](<Session A/Task 3/Task 3.png>)
+<img width="550" height="206" alt="Task 3" src="https://github.com/user-attachments/assets/a6ab26e2-c689-4ea7-8b8f-102ee1ce12cf" />
+
 
 **Result:** The patient record was received through HTTPS/TLS. Unlike HTTP, the application data is encrypted while travelling across the network.
 
@@ -62,7 +65,8 @@ This lab demonstrates protection of cloud data at rest and in transit, key manag
 2. Created KMS keys for the two tenants.
 3. Used the tenant-A KMS key to encrypt the small plaintext value `hello`.
 
-![Task 4 — KMS encrypt operation](<Session B/Task 4/Task 4.png>)
+<img width="917" height="78" alt="Task 4" src="https://github.com/user-attachments/assets/e0700ed2-6620-4b1b-9818-f1875df50930" />
+
 
 The later key listing confirms these KMS KeyIds:
 
@@ -78,13 +82,17 @@ The later key listing confirms these KMS KeyIds:
 3. Encrypted `record.txt` locally as `record.env.enc` with AES-256-CBC and `datakey.bin`.
 4. Deleted `datakey.bin`, `datakey.b64`, and the temporary `keys.txt`; only `datakey.enc`, the wrapped data key, remained.
 
-![Task 5.1 — Generate KMS data key](<Session B/Task 5/Task 5 - 1.png>)
+<img width="575" height="68" alt="Task 5 - 1" src="https://github.com/user-attachments/assets/64980758-1eca-480c-8947-11d110f1401b" />
 
-![Task 5.2 — Separate and decode the data key](<Session B/Task 5/Task 5 - 2.png>)
 
-![Task 5.3 — Encrypt the record locally](<Session B/Task 5/Task 5 - 3.png>)
+<img width="392" height="82" alt="Task 5 - 2" src="https://github.com/user-attachments/assets/89c47b6d-6d41-4fc8-a804-a6affefbe6c6" />
 
-![Task 5.4 — Remove plaintext data-key material](<Session B/Task 5/Task 5 - 4.png>)
+
+<img width="626" height="66" alt="Task 5 - 3" src="https://github.com/user-attachments/assets/7aa73887-4ef8-4b6b-9d28-618a445db94c" />
+
+
+<img width="514" height="87" alt="Task 5 - 4" src="https://github.com/user-attachments/assets/6dce93c5-06ae-4669-9cd9-f605916b71f9" />
+
 
 **Result:** The large record is encrypted locally with a data key, while KMS protects only the much smaller wrapped data key/master-key relationship.
 
@@ -95,7 +103,8 @@ The later key listing confirms these KMS KeyIds:
 3. Disabled tenant A's key immediately to simulate erasure.
 4. Tried to decrypt tenant A's wrapped data key. KMS returned `KMSInvalidStateException` and reported that the key was pending deletion.
 
-![Task 6 — Decrypt fails after tenant-A key erasure](<Session B/Task 6/Task 6 - 1.png>)
+<img width="1537" height="82" alt="Task 6 - 1" src="https://github.com/user-attachments/assets/ebaf48a8-fc91-4285-bdfe-ca9032ec93bd" />
+
 
 **Result:** Without tenant A's KMS key, `datakey.enc` cannot be unwrapped, so `record.env.enc` is unrecoverable. Tenant B's separate key remains isolated.
 
@@ -111,11 +120,14 @@ The later key listing confirms these KMS KeyIds:
 
 3. Built a hash chain by hashing each log entry together with the preceding hash.
 
-![Task 7.1 — Original file SHA-256](<Session B/Task 7/Task 7 - 1.png>)
+<img width="624" height="59" alt="Task 7 - 1" src="https://github.com/user-attachments/assets/7be85b5d-e1bf-4732-ae93-890f102ad0d1" />
 
-![Task 7.2 — Tampering changes the SHA-256 value](<Session B/Task 7/Task 7 - 2.png>)
 
-![Task 7.3 — Hash-chain log](<Session B/Task 7/Task 7 - 3.png>)
+<img width="631" height="109" alt="Task 7 - 2" src="https://github.com/user-attachments/assets/3cf68417-bb83-49d0-b3a5-ae0a9960ad17" />
+
+
+<img width="647" height="149" alt="Task 7 - 3" src="https://github.com/user-attachments/assets/78a02076-8a4f-4795-a5e8-f25a37f049af" />
+
 
 **Result:** A one-character change produces a completely different digest. The chained values make later alteration detectable.
 
@@ -123,11 +135,13 @@ The later key listing confirms these KMS KeyIds:
 
 The final verification listed both KMS keys and again showed `Verified OK` for the RSA signature.
 
-![Verification commands](<Session B/Verify Command.png>)
+<img width="817" height="299" alt="image" src="https://github.com/user-attachments/assets/caf949f7-d10f-490b-b916-24c81baa3307" />
+
 
 The TLS container and LocalStack environment were stopped, and the generated key/data files were removed according to the guide.
 
-![Cleanup and teardown](<Session B/Cleanup & Teardown.png>)
+<img width="688" height="137" alt="Cleanup   Teardown" src="https://github.com/user-attachments/assets/8ba1d338-9f62-403f-a9e2-9336ebbe966e" />
+
 
 ## Short-answer questions
 
