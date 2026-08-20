@@ -39,9 +39,10 @@ The authenticated request returned `Authenticated OK`.
 
 The validation returned `MFA OK`, showing that the TOTP code matched the shared secret and current time window.
 
-![Task 2 — TOTP secret and code](<Task 2/Task 2 - 1.png>)
+<img width="612" height="135" alt="image" src="https://github.com/user-attachments/assets/ad9a37dd-c96f-455b-97a7-b58d1d738577" />
 
-![Task 2 — MFA validation](<Task 2/Task 2 - 2.png>)
+<img width="713" height="116" alt="image" src="https://github.com/user-attachments/assets/fdd7c452-a9e1-4e9f-ba34-e9386d603575" />
+
 
 ## Task 3 — Kubernetes RBAC Authorization
 
