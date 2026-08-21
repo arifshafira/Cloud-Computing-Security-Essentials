@@ -15,13 +15,13 @@ This lab centralised application authentication logs in CloudWatch Logs through 
 
 An `auth.log` file was created with one normal login, four failed administrator login attempts from `203.0.113.9`, a successful login from the same IP address, and a 500 MB data export. This dataset represents an attacker attempting to guess credentials before accessing and exporting data.
 
-![Task 1 - generated authentication log](Task%201/Lab%205%20Task%201.png)
+<img width="623" height="317" alt="Lab 5 Task 1" src="https://github.com/user-attachments/assets/a3164521-50c1-416d-bbca-0e7906077e92" />
 
 ## Task 2: Centralise Logs
 
 LocalStack was used as the local CloudWatch Logs endpoint. The `/ccse/app` log group and `auth` stream received each line from `auth.log`. The `get-log-events` output shows that all seven entries were successfully read back from the central log service, including the failed attempts and export event.
 
-![Task 2 - CloudWatch Logs read-back](Task%202/Task%202.png)
+<img width="1688" height="132" alt="Task 2" src="https://github.com/user-attachments/assets/c9a47926-bba0-4dd6-a681-deb84573e724" />
 
 ## Task 3: Query Security-Relevant Activity
 
@@ -33,7 +33,7 @@ The failed-login records were filtered, grouped by source IP, and counted. The r
 
 This shows four failed logins originating from `203.0.113.9`.
 
-![Task 3 - failed-login count by IP](Task%203/Lab%206%20Task%203.png)
+<img width="558" height="68" alt="Lab 6 Task 3" src="https://github.com/user-attachments/assets/0c9795af-ae1d-43ed-b795-179a32c7db85" />
 
 ## Task 4: Tamper-Proof Hash-Chained Logs
 
@@ -51,11 +51,14 @@ The export value was then changed from `size=500MB` to `size=5MB` in `auth.tampe
 
 The hashes are different, proving the modified log no longer matches the original integrity chain. The screenshot's attempted `awk` display selects the event field rather than the hash; the values above are the actual SHA-256 final-chain values.
 
-![Task 4 - original hash chain](Task%204/Task%204%20-%201.png)
+<img width="1131" height="263" alt="Task 4 - 1" src="https://github.com/user-attachments/assets/e6002494-e3b7-4746-b075-bf83f263ab4f" />
 
-![Task 4 - tampered log chain creation](Task%204/Task%204%20-%202.png)
 
-![Task 4 - attempted final-hash display](Task%204/Task%204%20-%203.png)
+<img width="586" height="166" alt="Task 4 - 2" src="https://github.com/user-attachments/assets/771ef37f-4dfa-45fd-86cc-e174f466f001" />
+
+
+<img width="688" height="103" alt="Task 4 - 3" src="https://github.com/user-attachments/assets/b55d013f-5265-4e7d-b330-f9cbe9e72775" />
+
 
 ## Task 5: Detect the Incident by Correlation
 
@@ -65,7 +68,8 @@ The activity for `203.0.113.9` was correlated. It produced `fails=4`, `success=1
 ALERT: probable brute-force -> compromise -> data exfiltration
 ```
 
-![Task 5 - correlation alert](Task%205/Task%205.png)
+<img width="618" height="222" alt="image" src="https://github.com/user-attachments/assets/841a16c3-15fb-424b-a7ce-5d8c031e9593" />
+
 
 ## Task 6: Contain the Incident and Collect Evidence
 
@@ -75,9 +79,11 @@ The attacker IP address was blocked with an `iptables` INPUT rule. The displayed
 215268ee95d18e1b20af5e9c25dae2f95f736a5a0fb5433b93e91c03a7d655a0  evidence_20260821.log
 ```
 
-![Task 6 - containment rule](Task%206/Task%206%20-%201.png)
+<img width="793" height="102" alt="Task 6 - 1" src="https://github.com/user-attachments/assets/94ef5b19-1d92-4478-8775-758e3721d6ec" />
 
-![Task 6 - evidence hash](Task%206/Task%206%20-%202.png)
+
+<img width="713" height="102" alt="Task 6 - 2" src="https://github.com/user-attachments/assets/0453e907-7ca3-482b-9096-cbcaf00b2b3f" />
+
 
 ## Incident Report
 
